@@ -75,4 +75,20 @@ public class code{
             ptr2=next2;
         }
     }
+    //https://www.geeksforgeeks.org/program-to-unfold-a-folded-linked-list/
+    public static void unfold(ListNode head){
+        if(head==null||head.next==null)return;
+        ListNode h1=head,c1=head,h2=head.next,c2=head.next;
+        while(c2!=null&&c2.next!=null){
+            ListNode fwd=c2.next;
+            c1.next=fwd;
+            c2.next=fwd.next;
+            c1=c1.next;
+            c2=c2.next;
+        }
+        // c1.next=null;
+        h2=reverse(h2);
+        c1.next=h2;
+
+    }
 }
