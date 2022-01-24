@@ -38,4 +38,25 @@ public class code{
         }       
         return slow;
     }
+    
+    //leetcode 234 
+    public static boolean isPallindrome(Node head){
+        Node mid=mid(head);
+        Node revHead=reverse(mid.next);
+        mid.next=null;
+       
+        Node ptr1=head,ptr2=revHead;
+        boolean ans=true;
+        while(ptr1!=null&&ptr2!=null){
+            if(ptr1.val!=ptr2.val){
+                ans= false;
+                break;
+            }
+            ptr1=ptr1.next;
+            ptr2=ptr2.next;
+        
+        }
+        mid.next=reverse(revHead);
+        return ans;
+    }
 }
