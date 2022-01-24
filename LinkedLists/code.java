@@ -1,13 +1,13 @@
 import java.util.*;
 public class code{
-    public class Node{
+    public class ListNode{
         int val;
-        Node next;
-        Node(int val,Node next){
+        ListNode next;
+        ListNode(int val,ListNode next){
             this.val=val;
             this.next=next;
         }
-        Node(int val){
+        ListNode(int val){
             this.val=val;
             this.next=null;
         }
@@ -16,11 +16,11 @@ public class code{
 
     }
     //leetcode 206
-    public static Node reverse(Node head){
+    public static ListNode reverse(ListNode head){
         if(head==null||head.next==null)return head;
-        Node prev=null,curr=head;
+        ListNode prev=null,curr=head;
         while(curr!=null){
-            Node next=curr.next;
+            ListNode next=curr.next;
             curr.next=prev;
             prev=curr;
             curr=next;
@@ -29,9 +29,9 @@ public class code{
     }
     
     //leetcode 876
-    public static Node mid(Node head){
+    public static ListNode mid(ListNode head){
         if(head==null||head.next==null)return head;
-        Node slow=head,fast=head;
+        ListNode slow=head,fast=head;
         while(fast.next!=null&&fast.next.next!=null){
             slow=slow.next;
             fast=fast.next.next;
@@ -40,12 +40,12 @@ public class code{
     }
     
     //leetcode 234 
-    public static boolean isPallindrome(Node head){
-        Node mid=mid(head);
-        Node revHead=reverse(mid.next);
+    public static boolean isPallindrome(ListNode head){
+        ListNode mid=mid(head);
+        ListNode revHead=reverse(mid.next);
         mid.next=null;
        
-        Node ptr1=head,ptr2=revHead;
+        ListNode ptr1=head,ptr2=revHead;
         boolean ans=true;
         while(ptr1!=null&&ptr2!=null){
             if(ptr1.val!=ptr2.val){
@@ -58,5 +58,21 @@ public class code{
         }
         mid.next=reverse(revHead);
         return ans;
+    }
+    //leetcode 143
+    public static void fold(ListNode head){
+        ListNode mid=mid(head);
+        ListNode revHead=reverse(mid.next);
+        mid.next=null;
+
+        ListNode ptr1=head,ptr2=revHead;
+        while(ptr1!=null||ptr2!=null){
+            ListNode next1=ptr1.next;
+            ListNode next2=ptr2.next;
+            ptr1.next=ptr2;
+            ptr2.next=next1;
+            ptr1=next1;
+            ptr2=next2;
+        }
     }
 }
