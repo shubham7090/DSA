@@ -92,8 +92,8 @@ public class code{
 
     }
     //leetcode 21
-    public ListNode mergeSortedLists(ListNode head1,ListNode head2){
-        ListNode dummy=new ListNode(-1),c=dummy;
+    public static ListNode mergeSortedLists(ListNode head1,ListNode head2){
+        ListNode dummy=new ListNode(-1,null),c=dummy;
         ListNode c1=head1,c2=head2;
         while(c1!=null&&c2!=null){
             if(c1.val<c2.val){
@@ -117,5 +117,50 @@ public class code{
             c=c.next;
         }
         return dummy.next;
+    }
+    //leetcode 23
+    public class Pair implements Comparable<Pair>{
+        ListNode n;
+        Pair(ListNode n){
+            this.n=n;
+        }
+        public int compareTo(Pair o){
+            return this.n.val-o.n.val;
+        }
+    }
+    public static ListNode mergeKSortedLists1(ListNode[] lists){
+        //using priority queue
+        if(lists.length==0)return null;
+        ListNode head=new ListNode(0,null);
+        PriorityQueue<Pair> pq=new PriorityQueue<Pair>();
+        for(int i=0;i<lists.length;i++){
+            if(lists[i]!=null)
+                pq.add(new Pair(lists[i]));
+        }
+        ListNode temp=head;
+        while(pq.size()>0 ){
+            ListNode ele=pq.remove().n;
+            if(ele.next!=null)pq.add(new Pair(ele.next));
+            ele.next=null;
+            temp.next=ele;
+            temp=temp.next;
+        }
+        
+        return head.next;
+    }
+    //leetcode 23
+    public static ListNode mergeKSortedLists2helper(ListNode[] lists,int si,int ei){
+        if(si>ei)return null;
+        if(si==ei)return lists[si];
+        int mid=(si+ei)/2;
+        ListNode l1=mergeKSortedLists2helper(lists,si,mid);
+        ListNode l2=mergeKSortedLists2helper(lists,mid+1,ei);
+        return mergeSortedLists(l1, l2);
+    }
+    public static ListNode mergeKSortedLists2(ListNode[] lists){
+        if(lists.length==0)return null;
+        return mergeKSortedLists2helper(lists,0,lists.length-1);
+        //Time Compexity : nklogk
+        
     }
 }
