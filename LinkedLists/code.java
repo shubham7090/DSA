@@ -91,4 +91,31 @@ public class code{
         c1.next=h2;
 
     }
+    //leetcode 21
+    public ListNode mergeSortedLists(ListNode head1,ListNode head2){
+        ListNode dummy=new ListNode(-1),c=dummy;
+        ListNode c1=head1,c2=head2;
+        while(c1!=null&&c2!=null){
+            if(c1.val<c2.val){
+                c.next=c1;
+                c1=c1.next;
+                c=c.next;
+            }else{
+                c.next=c2;
+                c2=c2.next;
+                c=c.next;
+            }
+        }
+        while(c1!=null){
+            c.next=c1;
+            c1=c1.next;
+            c=c.next;
+        }
+        while(c2!=null){
+            c.next=c2;
+            c2=c2.next;
+            c=c.next;
+        }
+        return dummy.next;
+    }
 }
