@@ -161,6 +161,32 @@ public class code{
         if(lists.length==0)return null;
         return mergeKSortedLists2helper(lists,0,lists.length-1);
         //Time Compexity : nklogk
-        
     }
+
+    //https://www.geeksforgeeks.org/merge-sort-for-linked-list/
+    public static void mergeSort(ListNode head){
+
+    }
+    //similar to leetcode 328
+    public static ListNode oddEven(ListNode Head){
+        ListNode oddhead =new ListNode(-1);
+        ListNode evenhead =new ListNode(-1);
+        ListNode e=evenhead,o=oddhead,c=head;
+        while(c!=null){
+            if(c.val%2==0){
+                e.next=c;
+                e=e.next;
+            }else{
+                o.next=c;
+                o=o.next;
+            }
+            c=c.next;
+        }
+        //first odd then even
+        o.next=evenhead.next;
+        e.next=null;
+        return oddhead.next;
+    } 
+
+    
 }
