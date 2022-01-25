@@ -168,7 +168,7 @@ public class code{
 
     }
     //similar to leetcode 328
-    public static ListNode oddEven(ListNode Head){
+    public static ListNode oddEven(ListNode head){
         ListNode oddhead =new ListNode(-1);
         ListNode evenhead =new ListNode(-1);
         ListNode e=evenhead,o=oddhead,c=head;
@@ -187,6 +187,57 @@ public class code{
         e.next=null;
         return oddhead.next;
     } 
+    //leetcode 445
+    public static ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        l1=reverse(l1);
+        l2=reverse(l2);
+        ListNode c1=l1,c2=l2;
+        int carry=0;
+        ListNode dummy=new ListNode(-1);
+        ListNode d=dummy;
+        while(c1!=null&&c2!=null){
+            int sum=c1.val+c2.val+carry;
+            // System.out.println(sum);
+            carry=sum/10;
+            d.next= new ListNode(sum%10);
+            d=d.next;
+            c1=c1.next;
+            c2=c2.next;
+        }
+        ListNode c=c1==null?c2:c1;
+        while(c!=null){
+            int sum=c.val+carry;
+            carry=sum/10;
+            d.next=new ListNode(sum%10);
+            d=d.next;
+            c=c.next;
+        }
+        if(carry!=0)d.next=new ListNode(carry);
+        return reverse(dummy.next);
+    }
 
-    
+    // leet code 2
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummy=new ListNode(-1);
+        ListNode c1=l1,c2=l2,d=dummy;
+        int carry=0;
+        while(c1!=null&&c2!=null){
+            int sum=c1.val+c2.val+carry;
+            carry=sum/10;
+            d.next=new ListNode(sum%10);
+            d=d.next;
+            c1=c1.next;
+            c2=c2.next;
+        }
+        ListNode c=c1==null?c2:c1;
+        while(c!=null){
+            int sum=c.val+carry;
+            carry=sum/10;
+            d.next=new ListNode(sum%10);
+            d=d.next;
+            c=c.next;
+        }
+        if(carry!=0)d.next=new ListNode(carry);
+        return dummy.next;
+    }
 }
