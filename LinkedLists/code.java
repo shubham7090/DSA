@@ -334,11 +334,20 @@ public class code{
         }
         if(isCycle==false)return null;
         slow=head;
-        while(true){
-            if(slow==fast)return slow;
+        while(slow!=fast){
             slow=slow.next;
             fast=fast.next;
         }
+        return slow;
+    }
+    //leetcode 160
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode tail=headA;
+        while(tail.next!=null)tail=tail.next;
+        tail.next=headB;
+        ListNode ans=detectCycle(headA);//leetcode 142
+        tail.next=null;
+        return ans;
     }
 
 }
