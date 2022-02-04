@@ -240,4 +240,72 @@ public class code{
         if(carry!=0)d.next=new ListNode(carry);
         return dummy.next;
     }
+
+    //leetcode 138
+    class Node {
+        int val;
+        Node next;
+        Node random;
+    
+        public Node(int val) {
+            this.val = val;
+            this.next = null;
+            this.random = null;
+        }
+
+    } 
+     //method1 using extra space
+    public static Node copyRandomList(Node head) {
+        
+        HashMap<Node,Node> mp=new HashMap<>();
+        Node newHead=new Node(-1);
+        Node prev=newHead;
+        Node curr=head;
+        while(curr!=null){
+            prev.next=new Node(curr.val);
+            mp.put(curr,prev.next);
+            
+            prev=prev.next;
+            curr=curr.next;
+        }
+        newHead=newHead.next;
+        curr=head;
+        prev=newHead;
+        while(curr!=null){
+            prev.random=mp.get(curr.random);
+            prev=prev.next;
+            curr=curr.next;
+        }
+        return newHead;
+    }
+    // method 2 witout extra space
+    public Node copyRandomList2(Node head) {
+        if(head==null)return null;
+        Node curr=head;
+        while(curr!=null){
+            Node fwd=curr.next;
+            Node naya=new Node(curr.val);
+            curr.next=naya;
+            naya.next=fwd;
+            curr=fwd;   
+        }
+        curr = head;
+        while(curr!=null){
+            curr.next.random=curr.random!=null?curr.random.next:null;
+            curr=curr.next.next;
+            
+        }
+        curr=head;
+        Node nHead=curr.next;
+        Node ptr=curr.next;
+        while(curr!=null){
+            curr.next=curr.next.next;
+            if(ptr.next!=null)ptr.next=ptr.next.next;
+            curr=curr.next;
+            ptr=ptr.next;
+        }
+        
+        return nHead;
+    }
+
 }
