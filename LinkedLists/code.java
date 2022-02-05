@@ -357,5 +357,34 @@ public class code{
     //multiply 2 linked lists
     // ans= https://practice.geeksforgeeks.org/problems/multiply-two-linked-lists/1/#
 
+    //leetcode 83
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head==null||head.next==null)return head;
+        ListNode curr=head;
+        while(curr!=null&&curr.next!=null){
+            if(curr.val==curr.next.val)curr.next=curr.next.next;
+            else curr=curr.next;
+        }
+        return head;
+    }
+    //leetcode 82
+     public ListNode deleteDuplicates(ListNode head) {
+        if(head==null||head.next==null)return head;
+        ListNode dummy=new ListNode(-1,head);
+        ListNode itr=dummy,curr=head.next;
+        while(curr!=null){
+            boolean flag=false;
+            while(curr!=null&&itr.next.val==curr.val){
+                curr=curr.next;
+                flag=true;
+            }
+            if(flag==true)itr.next=curr;
+            else {
+                itr=itr.next;
+            }
+            if(curr!=null)curr=curr.next;
+        }
+        return dummy.next;
+    }
     
 }
