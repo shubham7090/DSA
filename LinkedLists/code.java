@@ -341,6 +341,8 @@ public class code{
         return slow;
     }
     //leetcode 160
+    //there is also a simpler and shorter way of doing it 
+    //https://leetcode.com/problems/intersection-of-two-linked-lists/discuss/1741919/JAVA-SOLUTION-with-explanation-also-asked-in-interview
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         ListNode tail=headA;
         while(tail.next!=null)tail=tail.next;
@@ -349,5 +351,11 @@ public class code{
         tail.next=null;
         return ans;
     }
+    //https://www.geeksforgeeks.org/subtract-two-numbers-represented-as-linked-lists/
+    // ans = https://practice.geeksforgeeks.org/problems/subtraction-in-linked-list/1/#
 
+    //multiply 2 linked lists
+    // ans= https://practice.geeksforgeeks.org/problems/multiply-two-linked-lists/1/#
+
+    
 }
