@@ -1,6 +1,6 @@
 import java.util.*;
 public class code{
-    class ListNode{
+    static class ListNode{
         int val;
         ListNode next;
         ListNode(int val,ListNode next){
@@ -119,7 +119,7 @@ public class code{
         return dummy.next;
     }
     //leetcode 23
-    public class Pair implements Comparable<Pair>{
+    public static class Pair implements Comparable<Pair>{
         ListNode n;
         Pair(ListNode n){
             this.n=n;
@@ -242,7 +242,7 @@ public class code{
     }
 
     //leetcode 138
-    class Node {
+    static class Node {
         int val;
         Node next;
         Node random;
@@ -358,7 +358,7 @@ public class code{
     // ans= https://practice.geeksforgeeks.org/problems/multiply-two-linked-lists/1/#
 
     //leetcode 83
-    public ListNode deleteDuplicates(ListNode head) {
+    public static ListNode deleteDuplicates2(ListNode head) {
         if(head==null||head.next==null)return head;
         ListNode curr=head;
         while(curr!=null&&curr.next!=null){
@@ -368,7 +368,7 @@ public class code{
         return head;
     }
     //leetcode 82
-     public ListNode deleteDuplicates(ListNode head) {
+     public static ListNode deleteDuplicates(ListNode head) {
         if(head==null||head.next==null)return head;
         ListNode dummy=new ListNode(-1,head);
         ListNode itr=dummy,curr=head.next;
@@ -386,5 +386,53 @@ public class code{
         }
         return dummy.next;
     }
-    
+    //segregate 0 1 in linked list
+    public static ListNode segregate01(ListNode head){
+        if(head==null||head.next==null)return head;
+        ListNode dummy0=new ListNode(-1);
+        ListNode dummy1=new ListNode(-1);
+        ListNode prev0=dummy0,prev1=dummy1,curr=head;
+        while(curr!=null){
+            if(curr.val==0){
+                prev0.next=curr;
+                prev0=curr;
+            }else{
+                prev1.next=curr;
+                prev1=curr;
+            }
+            curr=curr.next;
+        }
+        prev0.next=dummy1.next;
+        prev1.next=null;
+        return dummy0.next;
+    }
+    //segregate 0 1 2
+    //https://www.geeksforgeeks.org/sort-a-linked-list-of-0s-1s-or-2s/
+    public static ListNode segregate012(ListNode head){
+        if(head==null||head.next==null)return head;
+        ListNode dummy0=new ListNode(-1);
+        ListNode dummy1=new ListNode(-1);
+        ListNode dummy2=new ListNode(-1);
+        ListNode prev0=dummy0,prev1=dummy1,prev2=dummy2,curr=head;
+        while(curr!=null){
+            if(curr.val==0){
+                prev0.next=curr;
+                prev0=curr;
+            }else if(curr.val==1){
+                prev1.next=curr;
+                prev1=curr;
+            }else{
+                prev2.next=curr;
+                prev2=curr;
+            }
+            curr=curr.next;
+        }
+        prev0.next=dummy1.next;
+       if(dummy1.next==null){
+            prev0.next=dummy2.next;
+        }else prev1.next=dummy2.next;
+        
+        prev2.next=null;
+        return dummy0.next;
+    }
 }
